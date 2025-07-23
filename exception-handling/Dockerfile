@@ -1,0 +1,4 @@
+FROM eclipse-temurin:17-jdk-alpine
+ADD target/SPRINGBOOT-USERAPP.jar SPRINGBOOT-USERAPP.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "SPRINGBOOT-USERAPP.jar"]
