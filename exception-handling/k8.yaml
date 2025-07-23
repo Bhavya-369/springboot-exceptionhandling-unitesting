@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-userapp
+  labels:
+    app: springboot-userapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: springboot-userapp
+  template:
+    metadata:
+      labels:
+        app: springboot-userapp
+    spec:
+      containers:
+        - name: springboot-userapp
+          image: 486736699677.dkr.ecr.us-east-1.amazonaws.com/dev/springboot-userapp:latest/springboot-userapp:latest
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-userapp-service
+spec:
+  selector:
+    app: springboot-userapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
